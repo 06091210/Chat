@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>IDによるデータ管理</title>
+</head>
+<body>
+  <h2>IDによるデータ表示と更新</h2>
+
+  <label for="idInput">IDを入力:</label>
+  <input type="text" id="idInput" placeholder="例: 132124">
+  <button onclick="loadData()">データを表示</button>
+
+  <div id="dataSection" style="display:none; margin-top: 20px;">
+    <p>現在のデータ: <span id="currentData"></span></p>
+
+    <label for="newData">新しいデータ:</label>
+    <input type="text" id="newData">
+    <button onclick="updateData()">更新</button>
+  </div>
+
+  <script>
+    // 仮のデータベース（オブジェクト）
+    const database = {
+      "132124": "これはID132124のデータです。",
+      "100001": "別のIDのデータ。",
+    };
+
+    function loadData() {
+      const id = document.getElementById("idInput").value;
+      const dataSection = document.getElementById("dataSection");
+      const currentData = document.getElementById("currentData");
+
+      if (database[id]) {
+        currentData.textContent = database[id];
+        dataSection.style.display = "block";
+      } else {
+        alert("このIDのデータは見つかりません。");
+        dataSection.style.display = "none";
+      }
+    }
+
+    function updateData() {
+      const id = document.getElementById("idInput").value;
+      const newData = document.getElementById("newData").value;
+      const currentData = document.getElementById("currentData");
+
+      if (database[id]) {
+        database[id] = newData;
+        currentData.textContent = newData;
+        alert("データを更新しました！");
+      } else {
+        alert("無効なIDです。");
+      }
+    }
+  </script>
+</body>
+</html>
